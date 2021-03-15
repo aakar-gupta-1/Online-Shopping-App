@@ -11,7 +11,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();
-  final _imageUrlFocusNode= FocusNode();
+  final _imageUrlFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -19,10 +19,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
     super.initState();
   }
 
-  void _updateImageUrl(){
-    if(!_imageUrlFocusNode.hasFocus){
+  void _updateImageUrl() {
+    if (!_imageUrlFocusNode.hasFocus) {
       setState(() {});
     }
+  }
+
+  void _saveForm(){
+
   }
 
   @override
@@ -40,6 +44,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Product'),
+        actions: [IconButton(icon: Icon(Icons.save), onPressed: _saveForm)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -87,11 +92,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: _imageUrlController.text.isEmpty
                         ? Center(child: Text('Enter a URL'))
                         : FittedBox(
-                      child: Image.network(
-                        _imageUrlController.text,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                            child: Image.network(
+                              _imageUrlController.text,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                   ),
                   Expanded(
                     child: TextFormField(
@@ -100,11 +105,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       textInputAction: TextInputAction.done,
                       controller: _imageUrlController,
                       focusNode: _imageUrlFocusNode,
-                      onEditingComplete: (){
-                        setState(() {
-
-                        });
+                      onEditingComplete: () {
+                        setState(() {});
                       },
+                      onFieldSubmitted: (_) => _saveForm,
                     ),
                   ),
                 ],
